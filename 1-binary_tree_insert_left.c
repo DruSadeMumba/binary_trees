@@ -1,5 +1,4 @@
 #include "binary_trees.h"
-#include "binary_trees.h"
 
 /**
  * binary_tree_insert_left - Adding new node on the left child
@@ -32,5 +31,4 @@ binary_tree_t *binary_tree_insert_left(binary_tree_t *parent, int value)
 	parent->left = n;
 
 	return (n);
-
 }
