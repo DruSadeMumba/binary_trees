@@ -11,7 +11,6 @@ size_t binary_tree_size(const binary_tree_t *tree)
 
 	if (!tree)
 		return (0);
-
 	n = binary_tree_size(tree->left) + binary_tree_size(tree->right) + 1;
 	return (n);
 }
@@ -30,10 +29,8 @@ int is_perfect_recursive(const binary_tree_t *tree, int depth, int count)
 		return (1);
 	if (!tree->left && !tree->right)
 		return (depth == (int)(log2(count)));
-
 	if (!tree->left || !tree->right)
 		return (0);
-
 	return (is_perfect_recursive(tree->left, depth + 1, count) &&
 	is_perfect_recursive(tree->right, depth + 1, count));
 }
