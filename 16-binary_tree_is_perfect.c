@@ -26,7 +26,7 @@ size_t binary_tree_size(const binary_tree_t *tree)
 int is_perfect_recursive(const binary_tree_t *tree, int depth, int count)
 {
 	if (!tree)
-		return (1);
+		return (0);
 	if (!tree->left && !tree->right)
 		return (depth == (int)(log2(count)));
 	if (!tree->left || !tree->right)
