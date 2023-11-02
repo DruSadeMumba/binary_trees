@@ -71,6 +71,6 @@ int heap_extract(heap_t **root);
 int *heap_to_sorted_array(heap_t *heap, size_t *size);
 
 int is_perfect_recursive(const binary_tree_t *tree, int depth, int count);
-
+int is_bst(const binary_tree_t *tree, const int *min, const int *max);
 
 #endif
