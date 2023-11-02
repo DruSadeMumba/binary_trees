@@ -28,8 +28,8 @@ int is_perfect_recursive(const binary_tree_t *tree, int depth, int count)
 		return (0);
 	if (!tree->left && !tree->right)
 		return (depth == (int)(log2(count)));
-	return (is_perfect_recursive(tree->left, depth + 1, count)) &&
-			is_perfect_recursive(tree->right, depth + 1, count);
+	return (is_perfect_recursive(tree->left, depth + 1, count) &&
+			is_perfect_recursive(tree->right, depth + 1, count));
 }
 
 /**
