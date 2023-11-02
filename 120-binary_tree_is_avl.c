@@ -39,7 +39,7 @@ size_t binary_tree_height(const binary_tree_t *tree)
  */
 int is_bst(const binary_tree_t *tree, int min, int max)
 {
-	int left, right;
+	unsigned short left, right;
 
 	if (!tree)
 		return (1);
