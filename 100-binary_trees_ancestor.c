@@ -1,35 +1,36 @@
 #include "binary_trees.h"
-
 /**
- * binary_trees_ancestor - function that checks an ancestor
- * @first: First node
- * @second: Second node
- * Return: the node of the ancestor
- */
+ * binary_trees_ancestor - finding the uncle in binary tree
+ * @first: first node
+ * @second: second node
+ * Return: uncle node
+ **/
 
 binary_tree_t *binary_trees_ancestor(const binary_tree_t *first,
-				     const binary_tree_t *second)
+		const binary_tree_t *second)
 {
-	binary_tree_t *p, *q;
+	binary_tree_t *first_node, *second_node;
 
-	if (first == NULL || second == NULL)
-	{
+	if (!first || !second)
 		return (NULL);
-	}
+
 	if (first == second)
 	{
 		return ((binary_tree_t *)first);
 	}
 
-	p = first->parent;
-	q = second->parent;
-	if (p == NULL || first == q || (!p->parent && q))
+	first_node = first->parent;
+	second_node = second->parent;
+
+	if (!first_node || first == second_node ||
+			(first_node->parent == NULL && second_node))
 	{
-		return (binary_trees_ancestor(first, q));
+		return (binary_trees_ancestor(first, second_node));
 	}
-	else if (q == NULL || p == second || (!q->parent && p))
+	else if (!second_node || first_node == second ||
+			(second_node->parent == NULL && first_node))
 	{
-		return (binary_trees_ancestor(p, second));
+		return (binary_trees_ancestor(first_node, second));
 	}
-	return (binary_trees_ancestor(p, q));
+	return (binary_trees_ancestor(first_node, second_node));
 }
