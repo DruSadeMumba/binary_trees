@@ -37,13 +37,23 @@ size_t binary_tree_height(const binary_tree_t *tree)
  * @max: pointer to max val
  * Return: 0
  */
-int is_bst(const binary_tree_t *tree, const int *min, const int *max)
+int is_bst(const binary_tree_t *tree, int *min, int *max)
 {
-	 if (!tree)
-		 return (0);
-	 if (tree->n <= *min || tree->n >= *max)
-		 return (0);
-	 return (is_bst(tree->left, min, &(tree->n)) && is_bst(tree->right, &(tree->n), max));
+	int left, right;
+
+	if (!tree)
+		return (1);
+	if (tree->n < min || tree->n > max)
+		return (0);
+
+	left = tree->left ? 1 + binary_tree_height(tree->left) : 0;
+	right = tree->right ? 1 + binary_tree_height(tree->right) : 0;
+
+	if (abs(left - right) > 1)
+		return (0);
+
+	return (is_bst(tree->left, min, (int *) (tree->n - 1)) &&
+			is_bst(tree->right, (int *) (tree->n + 1), max));
 }
 
 /**
@@ -53,17 +63,7 @@ int is_bst(const binary_tree_t *tree, const int *min, const int *max)
  */
 int binary_tree_is_avl(const binary_tree_t *tree)
 {
-	int min = INT16_MIN, max = INT16_MAX;
-	int l_h, r_h;
-
-	if (!tree || !is_bst(tree, &min, &max))
+	if(!tree)
 		return (0);
-	l_h = binary_tree_height(tree->left);
-	r_h = binary_tree_height(tree->right);
-
-	if (abs(l_h - r_h) > 1)
-		return (0);
-	if (!binary_tree_is_avl(tree->left) || (!binary_tree_is_avl(tree->right)))
-		return (0);
-	return (1);
+	return (is_bst(tree, (int *) INT_MIN, (int *) INT_MAX));
 }
